@@ -1,88 +1,132 @@
 <Window x:Class="Voxela3D.PrintCalculator.MainWindow"
  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
- Title="Voxela 3D | Print Cost Calculator" Height="760" Width="1080" MinHeight="680" MinWidth="900"
+ Title="Voxela 3D | Print Cost Calculator" Height="790" Width="1120" MinHeight="700" MinWidth="940"
  WindowStartupLocation="CenterScreen" Background="{StaticResource BackgroundBrush}" FlowDirection="RightToLeft">
- <Grid Margin="28">
+ <Grid Margin="30,24">
   <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-  <DockPanel Margin="0,0,0,22">
-   <StackPanel DockPanel.Dock="Right">
-    <TextBlock Text="VOXELA 3D" Foreground="{StaticResource AccentBrush}" FontSize="13" FontWeight="Bold"/>
-    <TextBlock Text="ماشین‌حساب هزینه پرینت" FontSize="27" FontWeight="Bold" Margin="0,5,0,0"/>
+
+  <Grid Margin="0,0,0,22">
+   <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+   <StackPanel Grid.Column="0">
+    <TextBlock Text="VOXELA 3D" Foreground="{StaticResource AccentBrush}" FontSize="13" FontWeight="Bold" CharacterSpacing="90"/>
+    <TextBlock Text="ماشین‌حساب هزینه پرینت" FontSize="29" FontWeight="Bold" Margin="0,7,0,0"/>
+    <TextBlock Text="محاسبه دقیق هزینه چاپ سه‌بعدی FDM" Foreground="{StaticResource MutedBrush}" FontSize="13" Margin="0,5,0,0"/>
    </StackPanel>
-   <TextBlock Text="FDM PRINT COST" Foreground="{StaticResource MutedBrush}" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-  </DockPanel>
-  <TabControl Grid.Row="1" Background="{StaticResource PanelBrush}" BorderBrush="#3B4144" Padding="12">
+   <Border Grid.Column="1" Background="{StaticResource PanelAltBrush}" CornerRadius="8" Padding="14,9" VerticalAlignment="Center">
+    <TextBlock Text="FDM  PRINT COST" Foreground="{StaticResource AccentBrush}" FontSize="11" FontWeight="SemiBold" FlowDirection="LeftToRight"/>
+   </Border>
+  </Grid>
+
+  <TabControl Grid.Row="1" Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="14">
+   <TabControl.Resources>
+    <Style TargetType="{x:Type TabPanel}">
+     <Setter Property="Margin" Value="4,0,0,12"/>
+    </Style>
+   </TabControl.Resources>
    <TabItem Header="محاسبه هزینه">
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-     <Grid Margin="18">
-      <Grid.ColumnDefinitions><ColumnDefinition Width="1.15*"/><ColumnDefinition Width="18"/><ColumnDefinition Width="0.85*"/></Grid.ColumnDefinitions>
-      <StackPanel Grid.Column="0">
-       <TextBlock Text="مشخصات چاپ" FontSize="19" FontWeight="SemiBold" Margin="0,0,0,14"/>
-       <Label Content="فیلامنت"/>
-       <ComboBox x:Name="FilamentCombo" DisplayMemberPath="Name" SelectionChanged="FilamentCombo_SelectionChanged"/>
-       <Label Content="وزن قطعه (گرم)"/>
-       <TextBox x:Name="WeightBox" Text="45.79" FlowDirection="LeftToRight"/>
-       <Label Content="زمان چاپ"/>
-       <Grid><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="12"/><ColumnDefinition/></Grid.ColumnDefinitions>
-        <StackPanel><Label Content="ساعت"/><TextBox x:Name="HoursBox" Text="1" FlowDirection="LeftToRight"/></StackPanel>
-        <StackPanel Grid.Column="2"><Label Content="دقیقه"/><TextBox x:Name="MinutesBox" Text="42" FlowDirection="LeftToRight"/></StackPanel>
-       </Grid>
-       <Button Content="محاسبه هزینه" Click="Calculate_Click" Height="45" Margin="0,12,0,0"/>
-       <TextBlock x:Name="ErrorText" Foreground="#E58D7D" TextWrapping="Wrap" Margin="0,8"/>
-      </StackPanel>
-      <Border Grid.Column="2" Background="{StaticResource PanelAltBrush}" CornerRadius="12" Padding="22">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+     <Grid Margin="18,12,18,18">
+      <Grid.ColumnDefinitions><ColumnDefinition Width="1.25*"/><ColumnDefinition Width="24"/><ColumnDefinition Width="0.9*"/></Grid.ColumnDefinitions>
+      <Border Grid.Column="0" Background="{StaticResource PanelAltBrush}" CornerRadius="12" Padding="24">
        <StackPanel>
-        <TextBlock Text="خلاصه محاسبه" FontSize="19" FontWeight="SemiBold" Margin="0,0,0,20"/>
-        <TextBlock Text="هزینه مواد" Foreground="{StaticResource MutedBrush}"/>
-        <TextBlock x:Name="MaterialCostText" Text="—" FontSize="20" Margin="0,3,0,18"/>
-        <TextBlock Text="هزینه زمان چاپ" Foreground="{StaticResource MutedBrush}"/>
-        <TextBlock x:Name="TimeCostText" Text="—" FontSize="20" Margin="0,3,0,18"/>
-        <Separator Background="#555B5E" Margin="0,0,0,14"/>
-        <TextBlock Text="جمع هزینه" Foreground="{StaticResource MutedBrush}"/>
-        <TextBlock x:Name="SubtotalText" Text="—" FontSize="20" Margin="0,3,0,18"/>
-        <TextBlock Text="سود" Foreground="{StaticResource MutedBrush}"/>
-        <TextBlock x:Name="ProfitText" Text="—" FontSize="20" Margin="0,3,0,18"/>
-        <Border Background="#39372F" CornerRadius="9" Padding="15" Margin="0,8,0,0">
-         <StackPanel><TextBlock Text="قیمت نهایی" Foreground="{StaticResource AccentBrush}"/><TextBlock x:Name="FinalText" Text="—" FontSize="27" FontWeight="Bold" Foreground="{StaticResource AccentBrush}" Margin="0,5,0,0"/></StackPanel>
+        <TextBlock Text="مشخصات چاپ" FontSize="20" FontWeight="Bold" Margin="0,0,0,18"/>
+        <Label Content="فیلامنت"/>
+        <ComboBox x:Name="FilamentCombo" DisplayMemberPath="Name" SelectionChanged="FilamentCombo_SelectionChanged"/>
+        <Label Content="وزن قطعه (گرم)"/>
+        <TextBox x:Name="WeightBox" Text="45.79" FlowDirection="LeftToRight"/>
+        <Label Content="زمان چاپ"/>
+        <Grid>
+         <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="14"/><ColumnDefinition/></Grid.ColumnDefinitions>
+         <StackPanel><Label Content="ساعت"/><TextBox x:Name="HoursBox" Text="1" FlowDirection="LeftToRight"/></StackPanel>
+         <StackPanel Grid.Column="2"><Label Content="دقیقه"/><TextBox x:Name="MinutesBox" Text="42" FlowDirection="LeftToRight"/></StackPanel>
+        </Grid>
+        <Button Content="محاسبه هزینه" Click="Calculate_Click" Height="48" Margin="0,8,0,0" FontSize="15"/>
+        <TextBlock x:Name="ErrorText" Foreground="#F09A8A" TextWrapping="Wrap" Margin="2,10,2,0"/>
+       </StackPanel>
+      </Border>
+
+      <Border Grid.Column="2" Background="#252A2D" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" CornerRadius="12" Padding="22">
+       <StackPanel>
+        <TextBlock Text="خلاصه محاسبه" FontSize="19" FontWeight="Bold" Margin="0,0,0,5"/>
+        <TextBlock Text="جزئیات برآورد هزینه چاپ" Foreground="{StaticResource MutedBrush}" FontSize="12" Margin="0,0,0,20"/>
+        <Grid Margin="0,0,0,14">
+         <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+         <TextBlock Text="هزینه مواد" Foreground="{StaticResource MutedBrush}" VerticalAlignment="Center"/>
+         <TextBlock x:Name="MaterialCostText" Grid.Column="1" Text="—" FontSize="15" FontWeight="SemiBold"/>
+        </Grid>
+        <Grid Margin="0,0,0,14">
+         <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+         <TextBlock Text="هزینه زمان چاپ" Foreground="{StaticResource MutedBrush}" VerticalAlignment="Center"/>
+         <TextBlock x:Name="TimeCostText" Grid.Column="1" Text="—" FontSize="15" FontWeight="SemiBold"/>
+        </Grid>
+        <Separator Background="#4A5154" Margin="0,2,0,14"/>
+        <Grid Margin="0,0,0,14">
+         <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+         <TextBlock Text="جمع هزینه" Foreground="{StaticResource MutedBrush}" VerticalAlignment="Center"/>
+         <TextBlock x:Name="SubtotalText" Grid.Column="1" Text="—" FontSize="15" FontWeight="SemiBold"/>
+        </Grid>
+        <Grid Margin="0,0,0,14">
+         <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+         <TextBlock Text="سود" Foreground="{StaticResource MutedBrush}" VerticalAlignment="Center"/>
+         <TextBlock x:Name="ProfitText" Grid.Column="1" Text="—" FontSize="15" FontWeight="SemiBold"/>
+        </Grid>
+        <Border Background="#39372F" CornerRadius="9" Padding="16" Margin="0,8,0,0">
+         <StackPanel>
+          <TextBlock Text="قیمت نهایی" Foreground="{StaticResource AccentBrush}" FontSize="13" FontWeight="SemiBold"/>
+          <TextBlock x:Name="FinalText" Text="—" FontSize="25" FontWeight="Bold" Foreground="{StaticResource AccentBrush}" Margin="0,8,0,0" TextWrapping="Wrap"/>
+         </StackPanel>
         </Border>
+        <TextBlock Text="مبالغ به تومان محاسبه می‌شوند." Foreground="{StaticResource MutedBrush}" FontSize="11" Margin="0,14,0,0"/>
        </StackPanel>
       </Border>
      </Grid>
     </ScrollViewer>
    </TabItem>
+
    <TabItem Header="تنظیمات">
-    <ScrollViewer VerticalScrollBarVisibility="Auto"><Grid Margin="18">
-     <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="20"/><ColumnDefinition Width="1.3*"/></Grid.ColumnDefinitions>
-     <StackPanel>
-      <TextBlock Text="تنظیمات عمومی" FontSize="19" FontWeight="SemiBold" Margin="0,0,0,14"/>
-      <Label Content="هزینه هر ساعت پرینت (تومان)"/><TextBox x:Name="HourlyRateBox" FlowDirection="LeftToRight"/>
-      <Label Content="درصد سود"/><TextBox x:Name="ProfitPercentBox" FlowDirection="LeftToRight"/>
-      <Button Content="ذخیره تنظیمات" Click="SaveSettings_Click" HorizontalAlignment="Stretch"/>
-      <TextBlock x:Name="SaveStatus" Foreground="{StaticResource AccentBrush}" Margin="4,10"/>
-     </StackPanel>
-     <StackPanel Grid.Column="2">
-      <TextBlock Text="مدیریت فیلامنت‌ها" FontSize="19" FontWeight="SemiBold" Margin="0,0,0,14"/>
-      <ListBox x:Name="FilamentList" Height="190" Background="#303639" Foreground="#F2EEE6" BorderBrush="#454C50" SelectionChanged="FilamentList_SelectionChanged"/>
-      <Grid><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="12"/><ColumnDefinition/></Grid.ColumnDefinitions>
-       <StackPanel><Label Content="نام"/><TextBox x:Name="FilamentNameBox"/></StackPanel>
-       <StackPanel Grid.Column="2"><Label Content="برند"/><TextBox x:Name="BrandBox"/></StackPanel>
-      </Grid>
-      <Grid><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="12"/><ColumnDefinition/></Grid.ColumnDefinitions>
-       <StackPanel><Label Content="نوع"/><ComboBox x:Name="TypeBox" IsEditable="True"><ComboBoxItem Content="PLA"/><ComboBoxItem Content="PLA+"/><ComboBoxItem Content="ABS"/><ComboBoxItem Content="PETG"/><ComboBoxItem Content="TPU"/></ComboBox></StackPanel>
-       <StackPanel Grid.Column="2"><Label Content="قیمت"/><TextBox x:Name="PriceBox" FlowDirection="LeftToRight"/></StackPanel>
-      </Grid>
-      <Label Content="واحد قیمت"/>
-      <ComboBox x:Name="UnitBox"><ComboBoxItem Content="kg"/><ComboBoxItem Content="g"/></ComboBox>
-      <WrapPanel HorizontalAlignment="Left">
-       <Button Content="افزودن" Click="AddFilament_Click"/>
-       <Button Content="ذخیره ویرایش" Click="UpdateFilament_Click"/>
-       <Button Content="حذف" Background="#A95F52" Foreground="White" Click="DeleteFilament_Click"/>
-      </WrapPanel>
-     </StackPanel>
-    </Grid></ScrollViewer>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+     <Grid Margin="18,12,18,18">
+      <Grid.ColumnDefinitions><ColumnDefinition Width="0.9*"/><ColumnDefinition Width="24"/><ColumnDefinition Width="1.3*"/></Grid.ColumnDefinitions>
+      <Border Background="{StaticResource PanelAltBrush}" CornerRadius="12" Padding="22">
+       <StackPanel>
+        <TextBlock Text="تنظیمات عمومی" FontSize="20" FontWeight="Bold" Margin="0,0,0,18"/>
+        <Label Content="هزینه هر ساعت پرینت (تومان)"/>
+        <TextBox x:Name="HourlyRateBox" FlowDirection="LeftToRight"/>
+        <Label Content="درصد سود"/>
+        <TextBox x:Name="ProfitPercentBox" FlowDirection="LeftToRight"/>
+        <Button Content="ذخیره تنظیمات" Click="SaveSettings_Click" HorizontalAlignment="Stretch" Margin="0,8,0,0"/>
+        <TextBlock x:Name="SaveStatus" Foreground="{StaticResource AccentBrush}" TextWrapping="Wrap" Margin="4,12"/>
+       </StackPanel>
+      </Border>
+      <Border Grid.Column="2" Background="{StaticResource PanelAltBrush}" CornerRadius="12" Padding="22">
+       <StackPanel>
+        <TextBlock Text="مدیریت فیلامنت‌ها" FontSize="20" FontWeight="Bold" Margin="0,0,0,18"/>
+        <ListBox x:Name="FilamentList" Height="175" Margin="0,0,0,14" SelectionChanged="FilamentList_SelectionChanged"/>
+        <Grid>
+         <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="14"/><ColumnDefinition/></Grid.ColumnDefinitions>
+         <StackPanel><Label Content="نام"/><TextBox x:Name="FilamentNameBox"/></StackPanel>
+         <StackPanel Grid.Column="2"><Label Content="برند"/><TextBox x:Name="BrandBox"/></StackPanel>
+        </Grid>
+        <Grid>
+         <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="14"/><ColumnDefinition/></Grid.ColumnDefinitions>
+         <StackPanel><Label Content="نوع"/><ComboBox x:Name="TypeBox" IsEditable="True"><ComboBoxItem Content="PLA"/><ComboBoxItem Content="PLA+"/><ComboBoxItem Content="ABS"/><ComboBoxItem Content="PETG"/><ComboBoxItem Content="TPU"/></ComboBox></StackPanel>
+         <StackPanel Grid.Column="2"><Label Content="قیمت"/><TextBox x:Name="PriceBox" FlowDirection="LeftToRight"/></StackPanel>
+        </Grid>
+        <Label Content="واحد قیمت"/>
+        <ComboBox x:Name="UnitBox"><ComboBoxItem Content="kg"/><ComboBoxItem Content="g"/></ComboBox>
+        <WrapPanel HorizontalAlignment="Left" Margin="-3,4,0,0">
+         <Button Content="افزودن" Click="AddFilament_Click"/>
+         <Button Content="ذخیره ویرایش" Click="UpdateFilament_Click"/>
+         <Button Content="حذف" Background="#A95F52" Foreground="White" Click="DeleteFilament_Click"/>
+        </WrapPanel>
+       </StackPanel>
+      </Border>
+     </Grid>
+    </ScrollViewer>
    </TabItem>
   </TabControl>
-  <TextBlock Grid.Row="2" Text="Voxela 3D  •  محاسبه‌گر هزینه چاپ FDM" Foreground="{StaticResource MutedBrush}" HorizontalAlignment="Center" Margin="0,18,0,0"/>
+
+  <TextBlock Grid.Row="2" Text="VOXELA 3D   •   محاسبه‌گر هزینه چاپ FDM" Foreground="{StaticResource MutedBrush}" FontSize="12" HorizontalAlignment="Center" Margin="0,17,0,0"/>
  </Grid>
 </Window>
