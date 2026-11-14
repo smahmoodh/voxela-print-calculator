@@ -9,7 +9,7 @@
   <Grid Margin="0,0,0,22">
    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
    <StackPanel Grid.Column="0">
-    <TextBlock Text="VOXELA 3D" Foreground="{StaticResource AccentBrush}" FontSize="13" FontWeight="Bold" CharacterSpacing="90"/>
+    <TextBlock Text="VOXELA 3D" Foreground="{StaticResource AccentBrush}" FontSize="13" FontWeight="Bold"/>
     <TextBlock Text="ماشین‌حساب هزینه پرینت" FontSize="29" FontWeight="Bold" Margin="0,7,0,0"/>
     <TextBlock Text="محاسبه دقیق هزینه چاپ سه‌بعدی FDM" Foreground="{StaticResource MutedBrush}" FontSize="13" Margin="0,5,0,0"/>
    </StackPanel>
