@@ -15,14 +15,14 @@
   <SolidColorBrush x:Key="BorderBrush" Color="#41494D"/>
 
   <Style TargetType="{x:Type Window}">
-   <Setter Property="FontFamily" Value="Segoe UI"/>
+   <Setter Property="FontFamily" Value="Tahoma"/>
    <Setter Property="FontSize" Value="14"/>
    <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
    <Setter Property="SnapsToDevicePixels" Value="True"/>
   </Style>
   <Style TargetType="{x:Type TextBlock}">
    <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
-   <Setter Property="FontFamily" Value="Segoe UI"/>
+   <Setter Property="FontFamily" Value="Tahoma"/>
    <Setter Property="FontSize" Value="14"/>
    <Setter Property="TextOptions.TextHintingMode" Value="Fixed"/>
   </Style>
