@@ -70,7 +70,8 @@
         <Setter TargetName="ItemBorder" Property="Background" Value="#41494D"/>
        </Trigger>
        <Trigger Property="IsSelected" Value="True">
-        <Setter TargetName="ItemBorder" Property="Background" Value="#514735"/>
+        <Setter TargetName="ItemBorder" Property="Background" Value="#E8EDF1"/>
+        <Setter Property="Foreground" Value="#202629"/>
        </Trigger>
        <Trigger Property="IsEnabled" Value="False">
         <Setter Property="Foreground" Value="#777777"/>
