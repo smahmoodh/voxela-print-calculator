@@ -7,7 +7,7 @@
   <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
   <DockPanel Margin="0,0,0,22">
    <StackPanel DockPanel.Dock="Right">
-    <TextBlock Text="VOXELA 3D" Foreground="{StaticResource AccentBrush}" FontSize="13" FontWeight="Bold" CharacterSpacing="180"/>
+    <TextBlock Text="VOXELA 3D" Foreground="{StaticResource AccentBrush}" FontSize="13" FontWeight="Bold"/>
     <TextBlock Text="ماشین‌حساب هزینه پرینت" FontSize="27" FontWeight="Bold" Margin="0,5,0,0"/>
    </StackPanel>
    <TextBlock Text="FDM PRINT COST" Foreground="{StaticResource MutedBrush}" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
