@@ -8,4 +8,9 @@
     <AssemblyName>Voxela3D.PrintCalculator</AssemblyName>
     <RootNamespace>Voxela3D.PrintCalculator</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="assets\fonts\**\*.ttf" />
+    <Resource Include="assets\fonts\**\*.ttf" />
+  </ItemGroup>
 </Project>
