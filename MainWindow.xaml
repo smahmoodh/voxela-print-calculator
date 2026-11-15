@@ -9,8 +9,9 @@
     UseLayoutRounding="True"
         WindowStartupLocation="CenterScreen"
     Background="{StaticResource BackgroundBrush}"
-    FlowDirection="RightToLeft">
-  <Grid Margin="30,24">
+    >
+  <Grid Margin="30,24"
+      FlowDirection="RightToLeft">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
