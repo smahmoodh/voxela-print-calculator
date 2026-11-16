@@ -7,10 +7,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>Voxela3D.PrintCalculator</AssemblyName>
     <RootNamespace>Voxela3D.PrintCalculator</RootNamespace>
+    <ApplicationIcon>assets\icons\Voxela.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="assets\fonts\**\*.ttf" />
     <Resource Include="assets\fonts\**\*.ttf" />
+    <Resource Include="assets\icons\Voxela.ico" />
   </ItemGroup>
 </Project>
